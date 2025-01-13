@@ -1,0 +1,113 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartAppraisal - Faculty Dashboard</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon-16x16.png' %}">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'css/dashboard.css' %}" rel="stylesheet">
+</head>
+<body>
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <!-- ...existing sidebar code from layout.html... -->
+        
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                <div class="container-fluid">
+                    <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
+                </div>
+            </nav>
+
+            <div class="container-fluid p-4">
+                <div class="container py-4">
+                    <div class="row">
+                        <!-- Profile Overview Card -->
+                        <div class="col-md-4 mb-4">
+                            <div class="card">
+                                <div class="card-header bg-primary text-white">
+                                    <h5 class="card-title mb-0">Profile Overview</h5>
+                                </div>
+                                <div class="card-body">
+                                    <h6 class="card-subtitle mb-2 text-muted">Welcome, {{ user.username }}</h6>
+                                    <p class="card-text">
+                                        <strong>Email:</strong> {{ user.email }}<br>
+                                        <strong>Department:</strong> {{ user.faculty.department }}<br>
+                                        <strong>Position:</strong> {{ user.faculty.position }}
+                                    </p>
+                                    <a href="#" class="btn btn-outline-primary btn-sm">Edit Profile</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Stats -->
+                        <div class="col-md-8 mb-4">
+                            <div class="row">
+                                <div class="col-sm-6 mb-3">
+                                    <div class="card bg-info text-white">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Pending Appraisals</h5>
+                                            <h2 class="display-4">{{ pending_appraisals_count }}</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 mb-3">
+                                    <div class="card bg-success text-white">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Completed Appraisals</h5>
+                                            <h2 class="display-4">{{ completed_appraisals_count }}</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activities -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Recent Activities</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="list-group">
+                                        {% for activity in recent_activities %}
+                                        <div class="list-group-item">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h6 class="mb-1">{{ activity.title }}</h6>
+                                                <small>{{ activity.date }}</small>
+                                            </div>
+                                            <p class="mb-1">{{ activity.description }}</p>
+                                        </div>
+                                        {% empty %}
+                                        <div class="list-group-item">No recent activities</div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById("menu-toggle").addEventListener("click", function(e) {
+            e.preventDefault();
+            document.getElementById("wrapper").classList.toggle("toggled");
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+{% block title %}Evaluations{% endblock %}
+{% block content %}
+<div class="container py-4">
+    <h2>Evaluations</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Faculty</th>
+                <th>Total Lectures</th>
+                <th>Total Hours Taught</th>
+                <th>Total Seminars</th>
+                <th>Total Workshops</th>
+                <th>Total Attendance</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for evaluation in evaluations %}
+            <tr>
+                <td>{{ evaluation.faculty.user.get_full_name }}</td>
+                <td>{{ evaluation.total_lectures }}</td>
+                <td>{{ evaluation.total_hours_taught }}</td>
+                <td>{{ evaluation.total_seminars }}</td>
+                <td>{{ evaluation.total_workshops }}</td>
+                <td>{{ evaluation.total_attendance }}</td>
+                <td>{{ evaluation.status }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

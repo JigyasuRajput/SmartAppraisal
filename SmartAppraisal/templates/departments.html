@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+{% block title %}Departments{% endblock %}
+{% block content %}
+<div class="container py-4">
+    <h2>Departments</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Department</th>
+                <th>Faculty Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for department in departments %}
+            <tr>
+                <td>{{ department.department }}</td>
+                <td>{{ department.faculty_count }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

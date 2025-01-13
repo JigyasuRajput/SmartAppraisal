@@ -1,0 +1,250 @@
+/* Sidebar Styling */
+#sidebar-wrapper {
+    min-height: 100vh;
+    width: 280px;
+    background: #2c3e50;
+    box-shadow: 4px 0 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    margin-left: 0;
+}
+
+@media (min-width: 768px) {
+    #sidebar-wrapper {
+        margin-left: 0;
+    }
+
+    #page-content-wrapper {
+        min-width: 0;
+        width: 100%;
+        margin-left: 250px;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        margin-left: -250px;
+    }
+}
+
+.sidebar-heading {
+    padding: 1.5rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.list-group-item {
+    background: transparent;
+    border: none;
+    padding: 1rem 1.5rem;
+    color: #ecf0f1;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.list-group-item i {
+    margin-right: 1rem;
+    font-size: 1.2rem;
+    width: 24px;
+    text-align: center;
+}
+
+.list-group-item:hover {
+    background: rgba(255,255,255,0.1);
+    color: #3498db;
+    padding-left: 2rem;
+}
+
+.list-group-item.active {
+    background: #3498db;
+    color: white;
+}
+
+/* Sidebar Enhancements */
+.sidebar-logo {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
+.sidebar-divider {
+    color: #8795a1;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 1rem 1.5rem 0.5rem;
+    letter-spacing: 0.05em;
+}
+
+/* Main Content Styling */
+#page-content-wrapper {
+    width: 100%;
+    background: #f8f9fa;
+}
+
+.navbar {
+    background: white !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Navbar Enhancements */
+.notification-dropdown {
+    width: 300px;
+    padding: 0;
+}
+
+.notification-dropdown .dropdown-header {
+    background: #f8f9fa;
+    padding: 0.75rem 1rem;
+}
+
+.dropdown-item {
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-item i {
+    width: 20px;
+}
+
+.dashboard-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    transition: all 0.3s ease;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+}
+
+/* Card Enhancements */
+.dashboard-card {
+    border: none;
+    box-shadow: 0 0 0.875rem 0 rgba(33,37,41,.05);
+    border-radius: 0.5rem;
+}
+
+.card-header {
+    background: transparent;
+    padding: 1.25rem;
+}
+
+.stat-card {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 1.5rem;
+}
+
+.stat-card i {
+    font-size: 2rem;
+    opacity: 0.8;
+}
+
+.stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.2);
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+}
+
+.user-profile img {
+    width: 36px;
+    height: 36px;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 2px #e9ecef;
+    border-radius: 50%;
+    margin-right: 1rem;
+}
+
+/* Breadcrumb Styling */
+.breadcrumb {
+    margin-bottom: 0;
+    font-size: 0.875rem;
+}
+
+.breadcrumb-item a {
+    color: #6c757d;
+    text-decoration: none;
+}
+
+.breadcrumb-item.active {
+    color: #3498db;
+}
+
+/* Button Enhancements */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+}
+
+.btn i {
+    font-size: 1rem;
+}
+
+/* Responsive Toggle Button */
+#menu-toggle {
+    background: transparent;
+    border: none;
+    color: #2c3e50;
+    padding: 0.5rem;
+}
+
+#menu-toggle:hover {
+    color: #3498db;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #sidebar-wrapper {
+        margin-left: -280px;
+    }
+    
+    #wrapper.toggled #sidebar-wrapper {
+        margin-left: 0;
+    }
+
+    .page-header {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .btn-group {
+        width: 100%;
+        justify-content: stretch;
+    }
+}

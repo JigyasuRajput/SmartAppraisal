@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% block title %}Faculty List{% endblock %}
+{% block content %}
+<div class="container py-4">
+    <h2>Faculty List</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Department</th>
+                <th>Designation</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for faculty in faculties %}
+            <tr>
+                <td>{{ faculty.user.get_full_name }}</td>
+                <td>{{ faculty.user.email }}</td>
+                <td>{{ faculty.department }}</td>
+                <td>{{ faculty.designation }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
