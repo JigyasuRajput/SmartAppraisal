@@ -16,4 +16,8 @@ urlpatterns = [
     path('admin/evaluations/', views.evaluations, name='evaluations'),
     path('admin/reports/', views.reports, name='reports'),
     path('admin/settings/', views.settings, name='settings'),
+    
+    # Faculty Dashboard URL
+    path('faculty/dashboard/', views.faculty_dashboard, name='faculty_dashboard'),
+    path('faculty/<int:pk>/', views.faculty_detail, name='faculty_detail'),
 ]

@@ -133,3 +133,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 AUTH_USER_MODEL = 'Smart_Appraisal.User'
 
+
+# Add this line to handle post-login redirect
+LOGIN_REDIRECT_URL = 'faculty_dashboard'

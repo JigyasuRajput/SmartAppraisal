@@ -15,9 +15,9 @@ def login_view(request):
     if request.method == 'POST':
         form = CustomAuthenticationForm(request, data=request.POST)
         if form.is_valid():
-            email = form.cleaned_data.get('username')
+            email = form.cleaned_data.get('username')  # Retrieve the email
             password = form.cleaned_data.get('password')
-            user = authenticate(request, username=email, password=password)
+            user = authenticate(request, username=email, password=password)  # Authenticate with email
             if user is not None:
                 login(request, user)
                 if user.role == 'admin':
@@ -40,7 +40,7 @@ def register_admin(request):
             user.role = 'admin'
             user.save()
             AdminProfile.objects.create(user=user)
-            messages.success(request, 'Admin registered successfully')
+            messages.success(request, 'Admin registered successfully', extra_tags='alert-success')
             return redirect('login')
         else:
             messages.error(request, 'Error registering admin')
@@ -59,10 +59,14 @@ def register_faculty(request):
             messages.success(request, 'Faculty registered successfully')
             return redirect('login')
         else:
-            messages.error(request, 'Error registering faculty')
+            # Display form errors with improved aesthetics
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{field.capitalize()}: {error}")
     else:
         form = CustomUserCreationForm()
     return render(request, 'register_faculty.html', {'form': form})
+
 
 def is_admin(user):
     return user.is_authenticated and user.role == 'admin'
@@ -113,6 +117,45 @@ def admin_dashboard(request):
     }
     
     return render(request, 'admin_dashboard.html', context)
+
+
+# Ensure that only faculty users can access this view
+def is_faculty(user):
+    return user.role == 'faculty'
+
+@login_required
+@user_passes_test(is_faculty)
+@ensure_csrf_cookie
+def faculty_dashboard(request):
+    # Get counts for stats cards
+    active_appraisals = FacultyReport.objects.filter(
+        created_at__month=timezone.now().month
+    ).count()
+    pending_reviews = FacultyReport.objects.filter(
+        status='pending'
+    ).count()
+
+    # Get recent activities
+    recent_activities = []
+    
+    # Recent lectures
+    recent_lectures = Lecture.objects.filter(faculty__user=request.user).order_by('-date')[:5]
+    for lecture in recent_lectures:
+        recent_activities.append({
+            'title': 'Lecture Conducted',
+            'description': f'{lecture.faculty.user.get_full_name()} conducted {lecture.subject}',
+            'timestamp': lecture.date,
+            'user': lecture.faculty.user.get_full_name()
+        })
+
+    context = {
+        'active_appraisals': active_appraisals,
+        'pending_reviews': pending_reviews,
+        'recent_activities': sorted(recent_activities, key=lambda x: x['timestamp'], reverse=True)[:5]
+    }
+    
+    return render(request, 'faculty_dashboard.html', context)
+
 
 @login_required
 @user_passes_test(is_admin)
